@@ -24,3 +24,7 @@ Route::post('/register', 'RegisterUser@register_user' );
 
 Route::post('/login', 'LoginUser@login_user' );
 Route::get('/logout', 'LoginUser@logout_user' );
+
+// rotas para o mural de comentarios
+Route::post('/post', 'Comments@new' );
+
