@@ -30,41 +30,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Laravel - Página de Login
                 </div>
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                
-                <form action="{{ url('/register') }}" class="form register" method="post">
-                    @csrf <!-- {{ csrf_field() }} -->
-                    <label for="username">
-                        <span>Nome de usuário</span>
-                        <input type="text" name="name" placeholder="Nome de usuário" />
-                    </label>
-                    <label for="user_pass">
-                        <span>Email</span>
-                        <input type="email" name="email" />
-                    </label>
-
-                    <label for="user_pass">
-                        <span>Senha</span>
-                        <input type="password" name="password" />
-                    </label>
-                    <label for="user_pass">
-                        <span>Confirmação da Senha</span>
-                        <input type="password" name="password_confirmation" />
-                    </label>
-
-                    <button></button>
-                </form>
-
                 <div class="links">
                     @auth
                         <a href="{{ url('/') }}">Home</a>
@@ -73,6 +40,28 @@
                         <a href="{{ url('/register') }}">Register</a>
                     @endauth
                 </div>
+
+
+                @if ( isset( $_GET[ 'fail'] ) )
+                <div class="alert alert-danger">
+                    Erro: Confira os dados e tente novamente!
+                </div>
+                @endif
+                <form action="{{ url('/login') }}" class="form register" method="post">
+                    @csrf <!-- {{ csrf_field() }} -->
+                    <label for="email">
+                        <span>Email</span>
+                        <input type="email" name="email" />
+                    </label>
+
+                    <label for="user_pass">
+                        <span>Senha</span>
+                        <input type="password" name="password" />
+                    </label>
+                    <button>
+                        Enviar
+                    </button>
+                </form>
 
             </div>
         </div>

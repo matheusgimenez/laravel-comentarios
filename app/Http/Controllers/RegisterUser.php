@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
+
 
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use \Auth;
 
-class RegisterController extends Controller
+class RegisterUser extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -28,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -41,34 +44,30 @@ class RegisterController extends Controller
     }
     /**
      * Valida e cria o usuário
-     * 
+     *
+     * @param  Request  $request
      * @return boolean;
      */
-    public function register_user() {
-        // separa os campos
-        $fields = array(
-            'name' => $_POST[ 'username' ],
-            'email' => $_POST[ 'email' ],
-            'password' => $_POST[ 'user_pass' ] 
-        );
-        var_dump( $this->validator( $fields ) );
-        die();
-    } 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function register_user( Request $request )
     {
-        return Validator::make($data, [
+        //echo '1';
+
+        $validation = Validator::make( $request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-    }
+        if ( $validation->fails() ) {
+            return redirect('register')
+                        ->withErrors($validation)
+                        ->withInput();
+        }
 
+        // cria o usuario
+        $user = $this->create( $request->all() );
+        //Auth::loginUsingId( $user->id, true);
+        var_dump( Auth::loginUsingId( $user->id, true) );
+    }
     /**
      * Create a new user instance after a valid registration.
      *
