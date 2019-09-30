@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'Comments@show_all' );
+
 Route::get('/login', function () {
     return view('login');
 });

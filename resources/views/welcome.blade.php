@@ -61,7 +61,16 @@
                 </div>
             </div>
         </div><!-- .container content-itself -->
-
-
+        <div class="container-posts">
+            @if( isset( $posts ) && ! empty ( $posts ) )
+                    @foreach ( $posts as $post )
+                        <div class="content post">
+                            <h3 class="user-name">{{ $post[ 'user_name']}}</h3><!-- .user-name -->
+                            <small class="date">//{{ $post['date'] }}</small>
+                            <p>{{ $post['text'] }}</p>
+                        </div><!-- .content post -->
+                    @endforeach                    
+            @endif;
+        </div><!-- .container-posts -->
     </body>
 </html>
