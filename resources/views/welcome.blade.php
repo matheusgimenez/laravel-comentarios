@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Solutions - Mural de Recados</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -18,7 +18,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Solutions - Mural de Recados
                 </div>
 
                 <div class="links">
@@ -65,7 +65,7 @@
             @if( isset( $posts ) && ! empty ( $posts ) )
                     @foreach ( $posts as $post )
                         <div class="content post">
-                            <h3 class="user-name">{{ $post[ 'user_name']}}</h3><!-- .user-name -->
+                            <h3 class="user-name">Recado de: {{ $post[ 'user_name']}}</h3><!-- .user-name -->
                             <small class="date">//{{ $post['date'] }}</small>
                             <p>{{ $post['text'] }}</p>
                         </div><!-- .content post -->
